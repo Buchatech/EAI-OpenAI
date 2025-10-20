@@ -1,0 +1,45 @@
+services:
+  js-main:
+    build:
+      context: ./main
+      dockerfile: ../Dockerfile  # Dockerfile is at project root
+    container_name: js-main
+    restart: unless-stopped
+    init: true
+    env_file:
+      - ./main/.env
+    ports:
+      - "3000:3000"  # Expose app on localhost:3000
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    networks:
+      - expenseai-net
+
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: expense_tracker
+      POSTGRES_USER: your_user
+      POSTGRES_PASSWORD: your_password
+    ports:
+      - "5432:5432"  # Expose PostgreSQL for local dev/tools
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - expenseai-net
+
+networks:
+  expenseai-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+    # Persistent storage for PostgreSQL
