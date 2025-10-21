@@ -1,4 +1,4 @@
-# ExpenseAI - Smart Expense Tracker (Powered by Open AI)
+# ExpenseAI - Smart Expense Tracker (powered by OpenAI)
 
 ExpenseAI is an intelligent expense tracking application powered by OpenAI technology that helps you manage your personal or business expenses with AI-powered categorization. This application allows you to record, categorize, and analyze your expenses with a user-friendly interface and insightful visualizations.
 
@@ -289,6 +289,7 @@ This project is licensed under the Apache License - see the LICENSE file for det
 
 
 Created with ❤️ by S.Buchanan - [GitHub Profile](https://github.com/Buchatech)
+
 
 
 
